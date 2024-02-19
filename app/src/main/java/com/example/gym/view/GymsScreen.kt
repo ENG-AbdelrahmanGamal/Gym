@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -23,14 +24,16 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.gym.model.local.gym.model.Gym
+import com.example.gym.model.remote.gym.response.Gym
 import com.example.gym.ui.theme.Purple40
 
 @Preview
 @Composable
 fun GymsScreen() {
     val viewModel: GymViewModel = viewModel()
+    viewModel.getGym()
     LazyColumn() {
         items(viewModel.state) { gym ->
             GymItem(gym) { gymId ->
@@ -60,6 +63,14 @@ fun GymItem(gym: Gym, onclick: (Int) -> Unit) {
     } else {
         Icons.Filled.FavoriteBorder
     }
+//    SearchBar(
+//        query = string
+//        , onQueryChange =
+//        , onSearch =
+//        , active = ,
+//        onActiveChange =
+//    ) {
+//    }
     Card(modifier = Modifier.padding(4.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(10.dp)) {
             DefultIcon(Icons.Filled.Place, Modifier.weight(0.15f)) {}
@@ -93,7 +104,7 @@ fun GymDetails(gym: Gym, weight: Modifier) {
         Text(
             text = gym.name,
             style = MaterialTheme.typography.headlineLarge,
-            color = Purple40
+            color = Purple40, fontSize = 22.sp
         )
         CompositionLocalProvider() {
             Text(
