@@ -10,7 +10,8 @@ interface GymsApiService {
 
     @GET("gyms.json")
    suspend fun getGymsList(): List<Gym>
-
+    @GET("gyms.json")
+     fun getGymsListWithoutSuspend(): Call<List<Gym>>
 
    companion object{
 

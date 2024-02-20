@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
@@ -33,8 +34,8 @@ import com.example.gym.ui.theme.Purple40
 @Composable
 fun GymsScreen() {
     val viewModel: GymViewModel = viewModel()
-    viewModel.getGym()
-    LazyColumn() {
+
+    LazyColumn(Modifier.padding(3.dp)) {
         items(viewModel.state) { gym ->
             GymItem(gym) { gymId ->
                 viewModel.taggleFavouriteState(gymId)
@@ -71,7 +72,8 @@ fun GymItem(gym: Gym, onclick: (Int) -> Unit) {
 //        onActiveChange =
 //    ) {
 //    }
-    Card(modifier = Modifier.padding(4.dp)) {
+    Card(elevation = CardDefaults.cardElevation(
+        defaultElevation = 10.dp), modifier = Modifier.padding(4.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(10.dp)) {
             DefultIcon(Icons.Filled.Place, Modifier.weight(0.15f)) {}
             GymDetails(gym, Modifier.weight(0.70f))

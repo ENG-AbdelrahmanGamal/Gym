@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gym.model.remote.gym.GymsApiService
 import com.example.gym.model.remote.gym.response.Gym
-import com.example.gym.model.remote.gym.response.listOfGym
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -30,15 +32,17 @@ class GymViewModel(
             .build()
 
         apiService=retrofit.create(GymsApiService::class.java)
+
+
+        getGym()
     }
 
-      fun getGym(){
+     private  fun getGym(){
         viewModelScope.launch{
             apiService.getGymsList()?.let{ gymsList->
-        state= gymsList.restoreSelectedGymes()
+                state= gymsList.restoreSelectedGymes()
 
             }
-
         }
     }
     fun taggleFavouriteState(gymId:Int)
@@ -71,3 +75,8 @@ companion object {
     const val fav_IDS="favouriteGymsIDS"
 }
 }
+
+
+
+
+
