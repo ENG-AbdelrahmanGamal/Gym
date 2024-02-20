@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
                GymsScreen()
             }
 
-
+  println("add commit from Experiment branch")
         }
     }
 }
