@@ -8,10 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gym.model.remote.gym.GymsApiService
 import com.example.gym.model.remote.gym.response.Gym
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -24,7 +25,10 @@ class GymViewModel(
 
     var state by mutableStateOf(emptyList<Gym>())
     private var apiService :GymsApiService
+private lateinit var gymsList :List<Gym>
 
+ private val job= Job()
+    val scope= CoroutineScope(context = job+Dispatchers.IO)
     init {
         var retrofit:Retrofit=Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -38,9 +42,10 @@ class GymViewModel(
     }
 
      private  fun getGym(){
-        viewModelScope.launch{
-            apiService.getGymsList()?.let{ gymsList->
-                state= gymsList.restoreSelectedGymes()
+        scope.launch{
+         val gyms= apiService.getGymsList()
+            withContext(Dispatchers.Main) {
+                state = gyms.restoreSelectedGymes()
 
             }
         }
@@ -74,6 +79,11 @@ private fun List<Gym>.restoreSelectedGymes():List<Gym>{
 companion object {
     const val fav_IDS="favouriteGymsIDS"
 }
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
 }
 
 

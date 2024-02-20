@@ -46,12 +46,7 @@ fun GymsScreen() {
         }
     }
 
-//    Column (modifier = Modifier.verticalScroll(rememberScrollState())){
-//        listOfGym.forEach{gym->
-//            GymItem(gym)
-//
-//        }
-//    }
+
 
 
 
