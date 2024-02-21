@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gym.model.remote.gym.GymsApiService
 import com.example.gym.model.remote.gym.response.Gym
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,6 +27,7 @@ class GymViewModel(
     var state by mutableStateOf(emptyList<Gym>())
     private var apiService :GymsApiService
 private lateinit var gymsList :List<Gym>
+  private val handelError= CoroutineExceptionHandler{ _,throwable->throwable.printStackTrace()}
 
  private val job= Job()
     val scope= CoroutineScope(context = job+Dispatchers.IO)
@@ -42,10 +44,10 @@ private lateinit var gymsList :List<Gym>
     }
 
      private  fun getGym(){
-        scope.launch{
-         val gyms= apiService.getGymsList()
-            withContext(Dispatchers.Main) {
-                state = gyms.restoreSelectedGymes()
+        scope.launch(handelError){
+                val gyms= getGymFromRemote()
+                withContext(Dispatchers.Main) {
+                    state = gyms.restoreSelectedGymes()
 
             }
         }
@@ -75,7 +77,7 @@ private fun List<Gym>.restoreSelectedGymes():List<Gym>{
           }
         return this
         }
-
+private suspend fun getGymFromRemote()= withContext(Dispatchers.IO){apiService.getGymsList()}
 companion object {
     const val fav_IDS="favouriteGymsIDS"
 }

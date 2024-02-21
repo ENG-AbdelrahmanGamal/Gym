@@ -5,12 +5,14 @@ import com.google.gson.annotations.SerializedName
 
 
 data class Gym(
-@SerializedName("id")
-    val id:Int ,
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("gym_name")
-    val name:String,
+    val name: String,
     @SerializedName("gym_location")
-    val place:String,
+    val place: String,
+    @SerializedName("is_open")
+    val is_open: Boolean,
 
     var isFavourite: Boolean = false
 
