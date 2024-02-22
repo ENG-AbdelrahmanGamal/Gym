@@ -1,5 +1,6 @@
-# The Gym is application designed with cutting-edge technologies, including jetpack compose Kotlin language. This project follows to clean code principles,
-# The application is built with the Model-View-ViewModel (MVVM) design pattern.
+# Intro
+The Gym is application designed with cutting-edge technologies, including jetpack compose Kotlin language. This project follows to clean code principles,
+The application is built with the Model-View-ViewModel (MVVM) design pattern.
  # Some Image From App
 
   You in the Main Screen this display a list of Gyms that alocated in Cairo and Ciza.  
