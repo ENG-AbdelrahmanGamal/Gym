@@ -1,19 +1,16 @@
-package com.example.gym.model.remote.gym
+package com.example.gym.data.remote.gym
 
-import com.example.gym.model.remote.gym.response.Gym
+import androidx.room.Dao
+import com.example.gym.data.remote.gym.response.RemoteGym
 import retrofit2.http.GET
 import retrofit2.http.Query
-
+@Dao
 interface GymsApiService {
-
     @GET("gyms.json")
-   suspend fun getGymsList(): List<Gym>
-
-
+   suspend fun getGymsList(): List<RemoteGym>
    @GET("gyms.json?orderBy=\"id\"")
-   suspend fun getGym(@Query("equalTo") id:Int):Map<String,Gym>
+   suspend fun getGym(@Query("equalTo") id:Int):Map<String,RemoteGym>
    companion object{
-
        const val BASE_URL="https://seniorstepse-commerce-default-rtdb.firebaseio.com/"
 
    }

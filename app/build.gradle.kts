@@ -78,6 +78,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-paging:2.6.1")
+    implementation("androidx.room:room-runtime:2.6.1")
 
     // Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.48")
@@ -89,4 +90,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    //coroutines Test
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:")
+
 }

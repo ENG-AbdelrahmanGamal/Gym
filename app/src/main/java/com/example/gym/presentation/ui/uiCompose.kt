@@ -1,4 +1,4 @@
-package com.example.gym.view
+package com.example.gym.presentation.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.gym.model.remote.gym.response.Gym
+import com.example.gym.data.remote.gym.response.RemoteGym
+import com.example.gym.domain.model.Gym
 import com.example.gym.ui.theme.Purple40
 
 
@@ -37,7 +37,7 @@ fun DefultIcon(icon: ImageVector, weight: Modifier,contentDescription:String, on
 
 
 @Composable
-fun GymDetails(gym: Gym, weight: Modifier,horizontalAlignmentLine: Alignment.Horizontal=Alignment.Start) {
+fun GymDetails(gym: Gym, weight: Modifier, horizontalAlignmentLine: Alignment.Horizontal=Alignment.Start) {
     Column(modifier = weight, horizontalAlignment = horizontalAlignmentLine) {
         Text(
             text = gym.name,

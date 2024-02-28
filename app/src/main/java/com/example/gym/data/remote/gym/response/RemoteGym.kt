@@ -1,10 +1,12 @@
-package com.example.gym.model.remote.gym.response
+package com.example.gym.data.remote.gym.response
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-
-data class Gym(
+@Entity(tableName = "Gym")
+data class RemoteGym(
     @SerializedName("id")
     val id: Int,
     @SerializedName("gym_name")
@@ -14,9 +16,8 @@ data class Gym(
     @SerializedName("is_open")
     val is_open: Boolean,
 
-    var isFavourite: Boolean = false
-
-)
+) {
+}
 //
 //gym_location":"20 El-Gihad,Mit Akaba, Agouza, Giza Governorate 3754204, Egypt",
 // "gym_name":"UpTown Gym",
